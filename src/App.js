@@ -1,26 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import styled, { ThemeProvider } from 'styled-components/macro';
+import Map from './components/Map';
 import './App.css';
 
+const theme = {
+  hexSize: 140,
+  colors: {
+    blueLight: `#5CADE8`,
+    blueMedium: `#2475D9`,
+  },
+};
+
+const Wrapper = styled.div`
+  /* min-width: 100vw;
+  min-height: 100vh; */
+`;
+
 class App extends Component {
+  state = {
+    activeHex: null
+  };
+
+  updateActiveHex = (activeHex = null) => {
+    this.setState(state => {
+      if (state.activeHex !== activeHex) {
+        return { activeHex };
+      }
+    });
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <ThemeProvider theme={theme}>
+        <Wrapper className="App">
+          <Map
+            updateActiveHex={this.updateActiveHex}
+            activeHex={this.state.activeHex}
+          />
+        </Wrapper>
+      </ThemeProvider>
     );
   }
 }

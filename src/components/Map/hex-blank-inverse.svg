@@ -1,0 +1,9 @@
+<svg id="b14eef80-41a5-4d0f-9d26-8c3619a51440" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129.96 150.07">
+  <title>blank-inverse</title>
+  <polygon points="127.96 111.4 127.96 38.67 64.98 2.31 2 38.67 2 111.4 64.98 147.76 127.96 111.4" style="fill: #fff;stroke: #fff;stroke-miterlimit: 10;stroke-width: 4px"/>
+  <g>
+    <polygon points="86.99 51.02 86.99 15.05 64.98 2.35 42.98 15.05 42.98 51.02 86.99 51.02" style="fill: #5cade8"/>
+    <path d="M89,53H41V13.9L65,0,89,13.9ZM45,49H85V16.21L65,4.66,45,16.21Z" style="fill: #5cade8"/>
+  </g>
+  <path d="M65,150.07,0,112.55v-75L65,0l65,37.52v75ZM4,110.24l61,35.21,61-35.21V39.83L65,4.62,4,39.83Z" style="fill: #fff"/>
+</svg>
