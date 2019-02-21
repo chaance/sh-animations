@@ -5,6 +5,7 @@ export const theme = {
     blueLight: `#5CADE8`,
     blueMedium: `#2475D9`,
     grayDark: `#6e6f72`,
+    grayMedium: `#6e6f72`,
     score: ['#ee2436', '#fd8b24', '#fadc00', '#46be6e', '#0a8228'],
   },
 };
@@ -43,6 +44,7 @@ export const dimensions = {
   pillHeight,
   pillBorder,
   pillMargin,
+  pillCalculatedWidth,
   pillCalculatedHeight,
   pillListOffsetX,
   pillEvenOffsetY,

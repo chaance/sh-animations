@@ -7,6 +7,7 @@ import {
   PillWrapper,
   Button,
   Label,
+  Meta,
   ScoreIndicator,
 } from './Pill.styles';
 
@@ -20,6 +21,7 @@ const Pill = ({
   mapIsActive = false,
   onClick = noop,
   parentIsActive = false,
+  renderMeta,
   score = null,
   scoreComposition = {},
 }) => {
@@ -48,6 +50,7 @@ const Pill = ({
             />
           )}
           <Label>{label}</Label>
+          {renderMeta && <Meta>{renderMeta()}</Meta>}
         </Button>
         {children}
       </PillWrapper>
@@ -65,6 +68,7 @@ Pill.propTypes = {
   mapIsActive: PropTypes.bool,
   onClick: PropTypes.func,
   parentIsActive: PropTypes.bool,
+  renderMeta: PropTypes.func,
   score: PropTypes.number,
   scoreComposition: PropTypes.shape({
     '0': PropTypes.number,

@@ -55,6 +55,7 @@ export const PillWrapper = styled.div`
   list-style: none;
   height: 100%;
   width: 100%;
+  z-index: 1;
 `;
 
 export const ScoreIndicator = styled(SI)``;
@@ -98,4 +99,23 @@ export const Label = styled.span`
   margin-right: ${({ theme }) => theme.dimensions.pillMargin}px;
   margin-left: ${({ theme }) =>
     theme.dimensions.pillMargin + theme.dimensions.pillHeight}px;
+`;
+
+export const Meta = styled.span`
+  display: block;
+  margin-top: 4px;
+  margin-right: ${({ theme }) => theme.dimensions.pillMargin}px;
+  margin-left: ${({ theme }) =>
+    theme.dimensions.pillMargin + theme.dimensions.pillHeight}px;
+
+  span {
+    display: inline-block;
+    color: ${({ theme}) => theme.colors.grayMedium};
+  }
+
+  span:first-child {
+    padding: 0.05em 0.4em;
+    color: ${({ theme}) => theme.colors.grayDark};
+    border: 1px solid currentColor;
+  }
 `;

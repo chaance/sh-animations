@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import styled from 'styled-components';
 
-// this function just let's us pass a prop `element`
+// this function just lets us pass a prop `element`
 // to use any component dynamically in styled-components
 export default Component => {
   const bucket = Object.create(null);

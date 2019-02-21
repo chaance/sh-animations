@@ -4,8 +4,28 @@ import H from '../Hex';
 export const Hex = styled(H)`
   z-index: 2;
 
+  &:before {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: ${({ theme }) =>
+      theme.dimensions.pillListOffsetX +
+      theme.dimensions.pillCalculatedWidth / 2}px;
+    height: 4px;
+    background: #fff;
+    content: '';
+    transform: translate3d(-50%, 0, 0) scale(0);
+    transform-origin: center left;
+    transition: transform 0.5s ease-out;
+    transition-delay: 0.68s;
+  }
+
   &.active {
     z-index: 1;
+    &:before {
+      transform: translate3d(0, -50%, 0) scale(1);
+    }
   }
 
   &:nth-child(1) {

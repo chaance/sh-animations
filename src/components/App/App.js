@@ -21,7 +21,7 @@ class App extends Component {
 
   componentDidMount() {
     this._timeout = window.setTimeout(() => {
-      this.updateWrapperStateAndDimensions(
+      this.setWrapperDimensions(
         dimensions.hexBoxWidth,
         dimensions.hexBoxHeight
       );
@@ -54,13 +54,13 @@ class App extends Component {
     if (prevState.activePhase !== activePhase) {
       // if active phase is reset, width #1 (base hexBoxWidth)
       if (activePhase === null) {
-        this.updateWrapperStateAndDimensions(width1, hexBoxHeight);
+        this.setWrapperDimensions(width1, hexBoxHeight);
         return;
       }
       // if active phase is changing and not resetting, width #2
       if (prevState.activePhase === null) {
         const height = tacticCount * (pillCalculatedHeight + pillMargin);
-        this.updateWrapperStateAndDimensions(width2, height);
+        this.setWrapperDimensions(width2, height);
         return;
       }
     }
@@ -70,13 +70,13 @@ class App extends Component {
       // if active tactic is reset, width #2
       if (activeTactic === null) {
         const height = tacticCount * (pillCalculatedHeight + pillMargin);
-        this.updateWrapperStateAndDimensions(width2, height);
+        this.setWrapperDimensions(width2, height);
         return;
       } else {
         const height =
           (techniqueCount > tacticCount ? techniqueCount : tacticCount) *
           (pillCalculatedHeight + pillMargin);
-        this.updateWrapperStateAndDimensions(width3, height);
+        this.setWrapperDimensions(width3, height);
         return;
       }
     }
@@ -91,7 +91,7 @@ class App extends Component {
     }, cb);
   };
 
-  updateWrapperDimensions = (wrapperWidth, wrapperHeight, cb = noop) => {
+  setDimensionsInDOM = (wrapperWidth, wrapperHeight, cb = noop) => {
     if (wrapperWidth || wrapperHeight) {
       const { current } = this.wrapperRef;
       current.style.height = wrapperHeight ? wrapperHeight + 'px' : '';
@@ -100,10 +100,10 @@ class App extends Component {
     }
   };
 
-  updateWrapperStateAndDimensions = (wrapperWidth, wrapperHeight) => {
+  setWrapperDimensions = (wrapperWidth, wrapperHeight) => {
     if (wrapperWidth || wrapperHeight) {
       this.setWrapperState(wrapperWidth, wrapperHeight, () => {
-        this.updateWrapperDimensions(
+        this.setDimensionsInDOM(
           this.state.wrapperWidth,
           this.state.wrapperHeight
         );
