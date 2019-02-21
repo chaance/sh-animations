@@ -1,9 +1,68 @@
+@font-face {
+  font-family: metropolis;
+  font-style: normal;
+  font-weight: 400;
+  src: local('metropolis'),
+       local('Metropolis'),
+       url('./fonts/metropolis/eot/Metropolis-Medium.eot') format('opentype'),
+       url('./fonts/metropolis/woff2/Metropolis-Medium.woff2') format('woff2'),
+       url('./fonts/metropolis/woff/Metropolis-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: metropolis;
+  font-style: italic;
+  font-weight: 400;
+  src: local('metropolis'),
+       local('Metropolis'),
+       url('./fonts/metropolis/eot/Metropolis-MediumItalic.eot') format('opentype'),
+       url('./fonts/metropolis/woff2/Metropolis-MediumItalic.woff2') format('woff2'),
+       url('./fonts/metropolis/woff/Metropolis-MediumItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: metropolis;
+  font-style: bold;
+  font-weight: 700;
+  src: local('metropolis'),
+       local('Metropolis'),
+       url('./fonts/metropolis/eot/Metropolis-Bold.eot') format('opentype'),
+       url('./fonts/metropolis/woff2/Metropolis-Bold.woff2') format('woff2'),
+       url('./fonts/metropolis/woff/Metropolis-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: metropolis;
+  font-style: italic;
+  font-weight: 700;
+  src: local('metropolis'),
+       local('Metropolis'),
+       url('./fonts/metropolis/eot/Metropolis-BoldItalic.eot') format('opentype'),
+       url('./fonts/metropolis/woff2/Metropolis-BoldItalic.woff2') format('woff2'),
+       url('./fonts/metropolis/woff/Metropolis-BoldItalic.woff') format('woff');
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100vw;
+  min-height: 100vh;
+  background: #272727;
+  color: #fff;
+  font-family: metropolis, helvetica, -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -1,58 +1,59 @@
-import React, { Component } from 'react';
-import cx from 'classnames';
-import { range } from 'lodash';
+import React from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { List, TacticsWrapper, Pill, Pointer } from './Tactics.styles';
+import cx from 'classnames';
+import { TacticList, Pill } from './Tactics.styles';
 
-class Tactics extends Component {
-  state = {
-    prevActiveTactic: 0,
-  };
-
-  componentDidUpdate(prevProps) {
-    if (this.props.activeTactic !== prevProps.activeTactic) {
-      this.setState({ prevActiveTactic: prevProps.activeTactic });
-    }
-  }
-
-  render() {
-    const { updateActiveTactic, activeTactic, className } = this.props;
-    const { prevActiveTactic } = this.state;
-    return (
-      <TacticsWrapper
-        className={cx(className, {
-          'previousTactic-start': prevActiveTactic === null,
-          [`previousTactic-${prevActiveTactic}`]: prevActiveTactic !== null,
-          [`activeTactic-${activeTactic}`]: activeTactic !== null,
-        })}
-      >
-        {range(3).map(num => (
-          <CSSTransition
-            key={num}
-            in={activeTactic === num}
-            timeout={500}
-            classNames="animating"
-            unmountOnExit
-          >
-            <Pointer className={`pointer-${num + 1}`} aria-hidden />
-          </CSSTransition>
-        ))}
-        <List className="list">
-          {range(3).map(num => (
-            <Pill
-              key={num}
-              onClick={() => updateActiveTactic(num)}
-              mapIsActive={activeTactic !== null}
-              isActive={activeTactic === num}
-              numberTag={num + 1}
-              label={num}
-              nodeData={num}
-            />
-          ))}
-        </List>
-      </TacticsWrapper>
-    );
-  }
-}
+const Tactics = ({
+  children,
+  className,
+  tactics,
+  isActivePhase,
+  mapIsActive,
+  updateActiveTactic,
+  activeTactic,
+}) => (
+  <TacticList className={className}>
+    {tactics.map((tactic, t) => {
+      const isActiveTactic = activeTactic === t;
+      return (
+        <Pill
+          count={tactics.length}
+          key={tactic.label}
+          className={cx('tactic')}
+          isActive={isActiveTactic}
+          label={tactic.label}
+          parentIsActive={isActivePhase}
+          mapIsActive={mapIsActive}
+          onClick={() => updateActiveTactic(t, tactic.techniques.length)}
+          scoreComposition={
+            tactic.techniques &&
+            tactic.techniques.reduce((acc, technique) => {
+              if (technique.score > -1) {
+                const key = String(Math.floor(technique.score));
+                const count = acc[key] ? parseInt(acc[key], 10) + 1 : 1;
+                acc[key] = count;
+              }
+              return acc;
+            }, {})
+          } // { '0': numTechs, '1': numTechs, ... }
+        >
+          {tactic.techniques && (
+            <CSSTransition
+              in={isActiveTactic}
+              timeout={{
+                enter: 500,
+                exit: 1500,
+              }}
+              classNames="animating"
+              unmountOnExit
+            >
+              {children({ techniques: tactic.techniques, isActiveTactic })}
+            </CSSTransition>
+          )}
+        </Pill>
+      );
+    })}
+  </TacticList>
+);
 
 export default Tactics;

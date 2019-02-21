@@ -1,21 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { range } from 'lodash';
 import cx from 'classnames';
 import { CSSTransition } from 'react-transition-group';
-import hexBlank from './hex-blank.svg';
-import hexActive from './hex-blank-inverse.svg';
-import hexWing from './hex-wing.svg';
+import Phases from '../Phases';
+import Tactics from '../Tactics';
+import Techniques from '../Techniques';
 import dummyData from '../../data/dummy';
 import formatData from '../../lib/dataModel';
-import {
-  Hex,
-  MapWrapper,
-  PhaseList,
-  TacticList,
-  TechniqueList,
-  Pointer,
-  Pill,
-} from './Map.styles';
+import hexWing from './hex-wing.svg';
+import { Hex, Wrapper, Pointer } from './Map.styles';
 
 const attackPhases = formatData(dummyData);
 
@@ -53,7 +47,7 @@ class Map extends PureComponent {
     const { prevActivePhase } = this.state;
     const mapIsActive = activePhase !== null;
     return (
-      <MapWrapper
+      <Wrapper
         className={cx(className, {
           'previousHex-start': prevActivePhase === null,
           [`previousHex-${prevActivePhase + 1}`]: prevActivePhase !== null,
@@ -63,123 +57,72 @@ class Map extends PureComponent {
         <Hex
           onClick={() => updateActivePhase(null)}
           mapIsActive={mapIsActive}
-          className="header"
           element="header"
           label="Click to expand the menu"
           hideLabel={true}
           img={hexWing}
         />
-        {[1, 2, 3].map(num => (
+
+        {range(3).map(num => (
           <CSSTransition
             key={num}
-            in={activePhase === num - 1}
+            in={activePhase === num}
             timeout={500}
             classNames="animating"
             unmountOnExit
           >
-            <Pointer className={`pointer-${num}`} aria-hidden />
+            <Pointer className={`pointer-${num + 1}`} aria-hidden />
           </CSSTransition>
         ))}
-        <PhaseList className="list">
-          {attackPhases.map((phase, i) => {
-            const isActivePhase = activePhase === i;
-            return (
-              <Hex
-                key={phase.label}
-                activeImg={hexActive}
-                activeTactic={activeTactic}
-                childNodes={phase.tactics}
-                img={hexBlank}
-                isActive={isActivePhase}
-                label={phase.label}
-                mapIsActive={mapIsActive}
-                numberTag={i + 1}
-                onClick={() => updateActivePhase(i, phase.tactics.length)}
+
+        <Phases
+          activePhase={activePhase}
+          activeTactic={activeTactic}
+          mapIsActive={mapIsActive}
+          updateActivePhase={updateActivePhase}
+          phases={attackPhases}
+        >
+          {({ tactics, isActivePhase }) =>
+            tactics && (
+              <CSSTransition
+                in={isActivePhase}
+                timeout={{
+                  enter: 500,
+                  exit: 1500,
+                }}
+                classNames="animating"
+                unmountOnExit
               >
-                {phase.tactics && (
-                  <CSSTransition
-                    in={isActivePhase}
-                    timeout={{
-                      enter: 500,
-                      exit: 1500,
-                    }}
-                    classNames="animating"
-                    unmountOnExit
-                  >
-                    <TacticList>
-                      {phase.tactics.map((tactic, t) => {
-                        const isActiveTactic = activeTactic === t;
-                        return (
-                          <Pill
-                            count={phase.tactics.length}
-                            key={tactic.label}
-                            className={cx('tactic')}
-                            isActive={isActiveTactic}
-                            label={tactic.label}
-                            parentIsActive={isActivePhase}
-                            mapIsActive={mapIsActive}
-                            onClick={() =>
-                              updateActiveTactic(t, tactic.techniques.length)
-                            }
-                            scoreComposition={
-                              tactic.techniques &&
-                              tactic.techniques.reduce((acc, technique) => {
-                                if (technique.score > -1) {
-                                  const key = String(
-                                    Math.floor(technique.score)
-                                  );
-                                  const count = acc[key]
-                                    ? parseInt(acc[key], 10) + 1
-                                    : 1;
-                                  //console.log({ tactic: tactic.label, technique, key, count });
-                                  acc[key] = count;
-                                }
-                                return acc;
-                              }, {})
-                            } // { '0': numTechs, '1': numTechs, ... }
-                          >
-                            {tactic.techniques && (
-                              <CSSTransition
-                                in={isActiveTactic}
-                                timeout={{
-                                  enter: 500,
-                                  exit: 1500,
-                                }}
-                                classNames="animating"
-                                unmountOnExit
-                              >
-                                <TechniqueList>
-                                  {tactic.techniques.map(({ technique, score }, q) => {
-                                    return (
-                                      <Pill
-                                        count={tactic.techniques.length}
-                                        key={technique}
-                                        className={cx('technique')}
-                                        // isActive={isActiveTactic}
-                                        label={technique}
-                                        parentIsActive={isActiveTactic}
-                                        mapIsActive={mapIsActive}
-                                        onClick={() => alert('you clicked me!')}
-                                        score={score}
-                                      >
-                                        <span />
-                                      </Pill>
-                                    );
-                                  })}
-                                </TechniqueList>
-                              </CSSTransition>
-                            )}
-                          </Pill>
-                        );
-                      })}
-                    </TacticList>
-                  </CSSTransition>
-                )}
-              </Hex>
-            );
-          })}
-        </PhaseList>
-      </MapWrapper>
+                <Tactics
+                  tactics={tactics}
+                  isActivePhase={isActivePhase}
+                  mapIsActive={mapIsActive}
+                  updateActiveTactic={updateActiveTactic}
+                  activeTactic={activeTactic}
+                >
+                  {({ techniques, isActiveTactic }) => (
+                    <CSSTransition
+                      in={isActivePhase}
+                      timeout={{
+                        enter: 500,
+                        exit: 1500,
+                      }}
+                      classNames="animating"
+                      unmountOnExit
+                    >
+                      <Techniques
+                        techniques={techniques}
+                        isActiveTactic={isActiveTactic}
+                        mapIsActive={mapIsActive}
+                      />
+                    </CSSTransition>
+                  )}
+                </Tactics>
+              </CSSTransition>
+            )
+          }
+        </Phases>
+      </Wrapper>
     );
   }
 }

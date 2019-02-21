@@ -2,9 +2,20 @@ import styled from 'styled-components/macro';
 import styledDynamicTag from '../../lib/styledDynamicTag';
 const activeTransition = `all 150ms ease-in`;
 
+const BEZIER = `cubic-bezier(.17,.24,.04,.99)`;
+
 export const ListItem = styledDynamicTag(styled.li`
+  position: absolute;
   margin: 0;
   list-style: none;
+  width: ${({ theme }) => theme.dimensions.hexWidth}px;
+  height: ${({ theme }) => theme.dimensions.hexHeight}px;
+  transition: 1.5s transform ${BEZIER};
+
+  &:focus,
+  &:focus-within * {
+    outline: 0;
+  }
 `);
 
 export const HexWrapper = styled.div`

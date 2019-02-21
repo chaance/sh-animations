@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import styled, { ThemeProvider } from 'styled-components/macro';
+import { ThemeProvider } from 'styled-components/macro';
 import { noop } from 'lodash';
-import Map from './components/Map';
-import { theme, dimensions } from './context';
-import './App.css';
-
-const Wrapper = styled.div`
-  transition: height 0.5s ease, width 0.5s ease;
-  position: relative;
-`;
+import Map from '../Map';
+import { theme, dimensions } from '../../context';
+import { Wrapper } from './App.styles';
 
 class App extends Component {
   state = {
