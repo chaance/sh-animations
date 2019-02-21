@@ -5,14 +5,13 @@ import { noop } from 'lodash';
 import { CSSTransition } from 'react-transition-group';
 import Hide from '../Hide';
 import {
+  ListItem,
   HexWrapper,
   Img as I,
   Button,
   LabelWrapper,
-  NumberWrapper
+  NumberWrapper,
 } from './Hex.styles';
-
-const NumberTag = ({ number }) => <NumberWrapper>{number}</NumberWrapper>;
 
 const Label = ({ children, hide }) =>
   hide ? <Hide>{children}</Hide> : <LabelWrapper>{children}</LabelWrapper>;
@@ -21,7 +20,7 @@ const Img = ({ img, alt, activeImg, isActive }) => {
   const transitionProps = {
     timeout: 150,
     classNames: 'animating',
-    unmountOnExit: true
+    unmountOnExit: true,
   };
   return activeImg ? (
     <React.Fragment>
@@ -40,25 +39,24 @@ const Img = ({ img, alt, activeImg, isActive }) => {
 };
 
 const Hex = ({
+  activeImg,
   children,
-  onClick = noop,
-  isActive = false,
-  mapIsActive = false,
+  className = '',
   element = 'li',
-  label = 'Button',
-  numberTag,
   hideLabel = false,
   img,
-  activeImg,
-  className = ''
+  isActive = false,
+  label = 'Button',
+  mapIsActive = false,
+  numberTag,
+  onClick = noop,
 }) => {
-  const El = element;
-
   return (
-    <El
+    <ListItem
+      element={element}
       className={cx(className, {
         active: isActive,
-        mapIsActive: mapIsActive
+        mapIsActive: mapIsActive,
       })}
     >
       <HexWrapper>
@@ -68,25 +66,28 @@ const Hex = ({
           isActive={isActive}
           alt="decorative hex icon"
         />
-        <NumberTag number={numberTag} />
+        <NumberWrapper aria-hidden>{numberTag}</NumberWrapper>
         <Button onClick={onClick}>
           <Label hide={hideLabel}>{label}</Label>
         </Button>
         {children}
       </HexWrapper>
-    </El>
+    </ListItem>
   );
 };
 
 Hex.propTypes = {
-  onClick: PropTypes.func,
-  isActive: PropTypes.bool,
-  mapIsActive: PropTypes.bool,
+  activeImg: PropTypes.string,
+  children: PropTypes.node,
+  className: PropTypes.string,
   element: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  label: PropTypes.string,
-  numberTag: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  hideLabel: PropTypes.bool,
   img: PropTypes.string.isRequired,
-  className: PropTypes.string
+  isActive: PropTypes.bool,
+  label: PropTypes.string,
+  mapIsActive: PropTypes.bool,
+  numberTag: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onClick: PropTypes.func,
 };
 
 export default Hex;

@@ -1,14 +1,19 @@
 import styled from 'styled-components/macro';
-
+import styledDynamicTag from '../../lib/styledDynamicTag';
 const activeTransition = `all 150ms ease-in`;
+
+export const ListItem = styledDynamicTag(styled.li`
+  margin: 0;
+  list-style: none;
+`);
 
 export const HexWrapper = styled.div`
   position: relative;
   margin: 0;
   list-style: none;
-  overflow: hidden;
   height: 100%;
   width: 100%;
+  clip-path: polygon(0 -5000%, 0 5000%, 5000% 5000%, 5000% 0);
 `;
 
 export const Img = styled.img`
@@ -74,7 +79,7 @@ export const NumberWrapper = styled.span`
   position: absolute;
   top: 18px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   transition: ${activeTransition};
   color: ${({ theme }) => theme.colors.blueLight};
   font-size: 18px;

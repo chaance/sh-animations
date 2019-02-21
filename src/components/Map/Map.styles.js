@@ -1,19 +1,24 @@
 import styled from 'styled-components/macro';
 import H from '../Hex';
-import { getHexValues } from '../../lib/getHexValues';
+import P from '../Pill';
+import PillList from '../PillList';
 
 // calculations don't account for overlapping borders. Math is hard :(
-const HEX_BORDER = 4;
 const BEZIER = `cubic-bezier(.17,.24,.04,.99)`;
-
 const POINTER_TRANSLATE_MATH = `(100% + 2px)`;
+
+export const Pill = styled(P)``;
 
 export const Hex = styled(H)`
   position: absolute;
-  height: ${({ theme }) => theme.hexSize}px;
-  width: ${({ theme }) => getHexValues(theme.hexSize).width}px;
+  height: ${({ theme }) => theme.dimensions.hexHeight}px;
+  width: ${({ theme }) => theme.dimensions.hexWidth}px;
   transition: 1.5s transform ${BEZIER};
-  z-index: 1;
+  z-index: 2;
+
+  &.active {
+    z-index: 1;
+  }
 
   &:focus,
   &:focus-within * {
@@ -22,13 +27,15 @@ export const Hex = styled(H)`
 
   &.header {
     top: ${({ theme }) =>
-      getHexValues(theme.hexSize).offsetY - HEX_BORDER / 1.7}px;
+      theme.dimensions.hexOffsetY - theme.dimensions.hexBorder / 1.7}px;
     left: 0;
-    z-index: 2;
+    z-index: 3;
 
     &.mapIsActive {
-      transform: translateX(
-        ${({ theme }) => getHexValues(theme.hexSize).offsetX * -1.5}px
+      transform: translate3d(
+        ${({ theme }) => theme.dimensions.hexOffsetX * -1.5}px,
+        0,
+        0
       );
     }
   }
@@ -37,34 +44,54 @@ export const Hex = styled(H)`
     &:nth-child(1) {
       top: 0;
       left: ${({ theme }) =>
-        getHexValues(theme.hexSize).offsetX - HEX_BORDER / 2}px;
+        theme.dimensions.hexOffsetX - theme.dimensions.hexBorder / 2}px;
     }
 
     &:nth-child(2) {
       top: ${({ theme }) =>
-        getHexValues(theme.hexSize).offsetY - HEX_BORDER / 1.7}px;
+        theme.dimensions.hexOffsetY - theme.dimensions.hexBorder / 1.7}px;
       right: 0;
     }
 
     &:nth-child(3) {
       bottom: 0;
       left: ${({ theme }) =>
-        getHexValues(theme.hexSize).offsetX - HEX_BORDER / 2}px;
+        theme.dimensions.hexOffsetX - theme.dimensions.hexBorder / 2}px;
     }
   }
 `;
 
 export const MapWrapper = styled.div`
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate3d(0, -50%, 0);
   height: ${({ theme }) =>
-    getHexValues(theme.hexSize).boxHeight - HEX_BORDER - 1}px;
-  width: ${({ theme }) => getHexValues(theme.hexSize).boxWidth - HEX_BORDER}px;
+    theme.dimensions.hexBoxHeight - theme.dimensions.hexBorder - 1}px;
+  width: ${({ theme }) =>
+    theme.dimensions.hexBoxWidth - theme.dimensions.hexBorder}px;
 `;
 
-export const List = styled.ol`
+export const PhaseList = styled.ol`
   margin: 0;
   padding: 0;
   list-style: none;
+`;
+
+export const TacticList = styled(PillList)`
+  position: absolute;
+  top: 50%;
+  left: ${({ theme }) => theme.dimensions.pillListOffsetX * 2}px;
+  z-index: -1;
+  clip-path: polygon(0 -5000%, 0 5000%, 5000% 5000%, 5000% 0);
+`;
+
+export const TechniqueList = styled(PillList)`
+  position: absolute;
+  top: 50%;
+  left: ${({ theme }) => theme.dimensions.pillOffsetX}px;
+  z-index: -2;
+  font-size: 12px;
 `;
 
 export const Pointer = styled.span`
@@ -104,14 +131,15 @@ export const Pointer = styled.span`
   }
 
   &.pointer-1 {
-    transform: rotate(-45deg) translate(0, calc(${POINTER_TRANSLATE_MATH} * -1));
+    transform: rotate(-45deg)
+      translate3d(0, calc(${POINTER_TRANSLATE_MATH} * -1), 0);
   }
 
   &.pointer-2 {
-    transform: rotate(0) translate(0, 0);
+    transform: rotate(0) translate3d(0, 0, 0);
   }
 
   &.pointer-3 {
-    transform: rotate(45deg) translate(0, calc(${POINTER_TRANSLATE_MATH}));
+    transform: rotate(45deg) translate3d(0, calc(${POINTER_TRANSLATE_MATH}), 0);
   }
 `;

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
+// this component just hides text visually
+// that would still be important for assistive tech
 const Span = styled.span`
   border: 0;
   clip: rect(1px, 1px, 1px, 1px);

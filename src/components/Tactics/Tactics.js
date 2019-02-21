@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
+import { range } from 'lodash';
 import { CSSTransition } from 'react-transition-group';
 import { List, TacticsWrapper, Pill, Pointer } from './Tactics.styles';
 
 class Tactics extends Component {
   state = {
-    prevActiveTactic: 0
+    prevActiveTactic: 0,
   };
 
   componentDidUpdate(prevProps) {
@@ -22,33 +23,31 @@ class Tactics extends Component {
         className={cx(className, {
           'previousTactic-start': prevActiveTactic === null,
           [`previousTactic-${prevActiveTactic}`]: prevActiveTactic !== null,
-          [`activeTactic-${activeTactic}`]: activeTactic !== null
+          [`activeTactic-${activeTactic}`]: activeTactic !== null,
         })}
       >
-        {[1, 2, 3].map(num => (
+        {range(3).map(num => (
           <CSSTransition
             key={num}
-            in={activeTactic === num - 1}
+            in={activeTactic === num}
             timeout={500}
             classNames="animating"
             unmountOnExit
           >
-            <Pointer className={`pointer-${num}`} aria-hidden />
+            <Pointer className={`pointer-${num + 1}`} aria-hidden />
           </CSSTransition>
         ))}
         <List className="list">
-          {[1, 2, 3].map((num, i) => (
+          {range(3).map(num => (
             <Pill
               key={num}
-              onClick={() => updateActiveTactic(i)}
+              onClick={() => updateActiveTactic(num)}
               mapIsActive={activeTactic !== null}
-              isActive={activeTactic === i}
-              numberTag={i + 1}
+              isActive={activeTactic === num}
+              numberTag={num + 1}
               label={num}
               nodeData={num}
-            >
-              "Test"
-            </Pill>
+            />
           ))}
         </List>
       </TacticsWrapper>
