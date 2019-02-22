@@ -19,6 +19,7 @@ export const Hex = styled(H)`
     transform-origin: center left;
     transition: transform 0.5s ease-out;
     transition-delay: 0.68s;
+    will-change: transform;
   }
 
   &.active {

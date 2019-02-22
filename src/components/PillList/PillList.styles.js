@@ -12,6 +12,7 @@ export const List = styledDynamicTag(styled.ul`
   );
   transition: transform 0.5s ease-out 0s;
   list-style: none;
+  will-change: transform;
 
   &:before {
     content: '';
@@ -25,6 +26,7 @@ export const List = styledDynamicTag(styled.ul`
     height: calc(100% - ${({ theme }) => theme.dimensions.pillHeight * 2}px);
     width: 4px;
     left: 50%;
+    will-change: transform;
   }
 
   &.animating-enter-active:before,

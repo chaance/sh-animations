@@ -16,6 +16,7 @@ export const Indicator = styled.div`
   border: ${({ theme }) => theme.dimensions.pillBorder}px solid #fff;
   border-radius: 999px;
   overflow: hidden;
+  will-change: transform;
 
   ${({ score, label }) => css`
     ${!isNaN(score) && css`

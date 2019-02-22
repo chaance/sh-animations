@@ -9,6 +9,7 @@ export const Hex = styled(H)`
     theme.dimensions.hexOffsetY - theme.dimensions.hexBorder / 1.7}px;
   left: 0;
   z-index: 3;
+  will-change: transform;
 
   &.mapIsActive {
     transform: translate3d(
@@ -43,6 +44,7 @@ export const Pointer = styled.span`
   background: #fff;
   opacity: 0;
   z-index: 0;
+  will-change: transform, filter, opacity;
 
   .previousHex-start & {
     transition-delay: 0.35s;

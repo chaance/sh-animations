@@ -19,6 +19,7 @@ export const Pill = styled(P)`
     transition: transform 0.5s ease-out;
     transition-delay: 0.68s;
     z-index: 0;
+    will-change: transform;
   }
 
   &.active {

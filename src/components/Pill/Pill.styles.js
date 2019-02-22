@@ -9,6 +9,7 @@ export const ListItem = styledDynamicTag(styled.li`
   margin: ${({ theme }) => theme.dimensions.pillMargin}px 0 !important;
   transition: transform 0.5s ease-out 0.75s;
   list-style: none;
+  will-change: transform;
 
   ${({ count, theme }) =>
     count &&
