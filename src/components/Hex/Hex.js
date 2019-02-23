@@ -11,6 +11,8 @@ import {
   Button,
   LabelWrapper,
   NumberWrapper,
+  Clipper,
+  Pointer,
 } from './Hex.styles';
 
 const Label = ({ children, hide }) =>
@@ -59,6 +61,8 @@ const Hex = ({
         mapIsActive: mapIsActive,
       })}
     >
+      <Pointer aria-hidden />
+      <Clipper aria-hidden />
       <HexWrapper>
         <Img
           img={img}

@@ -2,6 +2,7 @@ import { getHexValues } from '../lib/getHexValues';
 
 export const theme = {
   colors: {
+    black: `#272727`,
     blueLight: `#5CADE8`,
     blueMedium: `#2475D9`,
     grayDark: `#6e6f72`,
@@ -31,6 +32,9 @@ const pillListOffsetX = hexWidth;
 const pillEvenOffsetY = (pillCalculatedHeight + pillMargin) / 2;
 const pillOffsetX = pillCalculatedWidth + pillListOffsetX;
 
+// other measurements
+const pointerOffset = hexOffsetY - hexBorder / 2;
+
 export const dimensions = {
   hexSize,
   hexBorder,
@@ -49,4 +53,5 @@ export const dimensions = {
   pillListOffsetX,
   pillEvenOffsetY,
   pillOffsetX,
+  pointerOffset,
 };

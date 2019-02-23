@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import styledDynamicTag from '../../lib/styledDynamicTag';
+import { emptyBlock } from '../../lib/styledUtils';
 const activeTransition = `all 150ms ease-in`;
 
 const BEZIER = `cubic-bezier(.17,.24,.04,.99)`;
@@ -24,17 +25,14 @@ export const HexWrapper = styled.div`
   list-style: none;
   height: 100%;
   width: 100%;
-  clip-path: polygon(0 -5000%, 0 5000%, 5000% 5000%, 5000% 0);
+  /* clip-path: polygon(0 -5000%, 0 5000%, 5000% 5000%, 5000% 0); */
 `;
 
 export const Img = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+  ${emptyBlock()}
   transition: ${activeTransition};
   opacity: 1;
+  z-index: 2;
 
   &.animating-enter {
     opacity: 0.01;
@@ -63,15 +61,11 @@ export const Button = styled.button`
   box-shadow: none;
   text-transform: none;
 
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  ${emptyBlock()}
   transition: ${activeTransition};
   background-color: transparent;
   color: #fff;
+  z-index: 2;
 
   .active & {
     color: ${({ theme }) => theme.colors.blueMedium};
@@ -95,8 +89,60 @@ export const NumberWrapper = styled.span`
   color: ${({ theme }) => theme.colors.blueLight};
   font-size: 18px;
   text-align: center;
+  z-index: 2;
 
   .active & {
     color: #fff;
+  }
+`;
+
+export const Clipper = styled.span`
+  ${emptyBlock()}
+  top: 50%;
+  left: -100%;
+  width: 150%;
+  height: ${({ theme }) => theme.dimensions.pillCalculatedHeight + 2}px;
+  background: ${({ theme }) => theme.colors.black} ;
+  transform: translateY(-50%);
+  z-index: 1;
+`;
+
+const pointerTranslate = 'translate3d(-50%, -50%, 0)';
+
+export const Pointer = styled.span`
+  ${emptyBlock('right')}
+  right: calc(50% - ${({ theme }) => theme.dimensions.hexBorder}px);
+  height: ${({ theme }) => theme.dimensions.hexBorder}px;
+  background: #fff;
+  transition: transform 0.2s ease-in 0.5s;
+  transform: scaleX(0);
+  transform-origin: center right;
+  z-index: 2;
+
+  li:nth-child(1) & {
+    top: ${({ theme }) => theme.dimensions.pointerOffset}px;
+    transform: ${pointerTranslate} rotate(-45deg) scaleX(0);
+  }
+
+  li.active:nth-child(1) & {
+    transform: ${pointerTranslate} rotate(-45deg) scaleX(1);
+  }
+
+  li:nth-child(2) & {
+    top: 50%;
+    transform: ${pointerTranslate} scaleX(0);
+  }
+
+  li.active:nth-child(2) & {
+    transform: ${pointerTranslate} scaleX(1);
+  }
+
+  li:nth-child(3) & {
+    top: ${({ theme }) => theme.dimensions.hexHeight - theme.dimensions.pointerOffset}px;
+    transform: ${pointerTranslate} rotate(45deg) scaleX(0);
+  }
+
+  li.active:nth-child(3) & {
+    transform: ${pointerTranslate} rotate(45deg) scaleX(1);
   }
 `;

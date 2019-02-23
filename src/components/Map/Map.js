@@ -62,19 +62,6 @@ class Map extends PureComponent {
           hideLabel={true}
           img={hexWing}
         />
-
-        {range(3).map(num => (
-          <CSSTransition
-            key={num}
-            in={activePhase === num}
-            timeout={500}
-            classNames="animating"
-            unmountOnExit
-          >
-            <Pointer className={`pointer-${num + 1}`} aria-hidden />
-          </CSSTransition>
-        ))}
-
         <Phases
           activePhase={activePhase}
           activeTactic={activeTactic}
