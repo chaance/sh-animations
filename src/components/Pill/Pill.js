@@ -40,7 +40,10 @@ const Pill = ({
       })}
     >
       <PillWrapper className="wrapper">
-        <Button className="button" onClick={onClick}>
+        <Button
+          className={cx('button', { 'has-click-handler': onClick, active: isActive })}
+          onClick={onClick}
+        >
           {(score || hasScoreComposition) && (
             <ScoreIndicator
               hasScoreComposition={hasScoreComposition}

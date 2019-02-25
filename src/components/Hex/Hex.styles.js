@@ -19,15 +19,6 @@ export const ListItem = styledDynamicTag(styled.li`
   }
 `);
 
-export const HexWrapper = styled.div`
-  position: relative;
-  margin: 0;
-  list-style: none;
-  height: 100%;
-  width: 100%;
-  /* clip-path: polygon(0 -5000%, 0 5000%, 5000% 5000%, 5000% 0); */
-`;
-
 export const Img = styled.img`
   ${emptyBlock()}
   transition: ${activeTransition};
@@ -45,6 +36,21 @@ export const Img = styled.img`
 
   &.animating-exit-active {
     opacity: 0;
+  }
+`;
+
+
+export const HexWrapper = styled.div`
+  position: relative;
+  margin: 0;
+  list-style: none;
+  height: 100%;
+  width: 100%;
+  /* clip-path: polygon(0 -5000%, 0 5000%, 5000% 5000%, 5000% 0); */
+
+  &:hover:not(.active) ${Img},
+  &:focus-within:not(.active) ${Img} {
+    filter: brightness(140%) saturate(70%);
   }
 `;
 
@@ -66,6 +72,10 @@ export const Button = styled.button`
   background-color: transparent;
   color: #fff;
   z-index: 2;
+
+  &.has-click-handler {
+    cursor: pointer;
+  }
 
   .active & {
     color: ${({ theme }) => theme.colors.blueMedium};

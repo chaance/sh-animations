@@ -63,7 +63,7 @@ const Hex = ({
     >
       <Pointer aria-hidden />
       <Clipper aria-hidden />
-      <HexWrapper>
+      <HexWrapper className={cx({ active: isActive })}>
         <Img
           img={img}
           activeImg={activeImg}
@@ -71,7 +71,10 @@ const Hex = ({
           alt="decorative hex icon"
         />
         <NumberWrapper aria-hidden>{numberTag}</NumberWrapper>
-        <Button onClick={onClick}>
+        <Button
+          onClick={onClick}
+          className={cx({ 'has-click-handler': onClick })}
+        >
           <Label hide={hideLabel}>{label}</Label>
         </Button>
         {children}
