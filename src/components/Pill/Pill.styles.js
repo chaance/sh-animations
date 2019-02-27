@@ -76,7 +76,7 @@ export const Button = styled.button`
 
   display: block;
   overflow: hidden;
-  width: 176px;
+  width: ${({ theme }) => theme.dimensions.pillWidth}px;
   height: ${({ theme }) => theme.dimensions.pillHeight}px;
   border: ${({ theme }) => theme.dimensions.pillBorder}px solid #fff;
   border-radius: 999px;

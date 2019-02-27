@@ -22,7 +22,7 @@ const hexBoxHeight = getHexValues(hexSize).boxHeight;
 const hexBoxWidth = getHexValues(hexSize).boxWidth;
 
 // pill sizes
-const pillWidth = 176;
+const pillWidth = 190;
 const pillHeight = 50;
 const pillBorder = 4;
 const pillMargin = 10;
