@@ -132,7 +132,7 @@ export const Meta = styled.span`
   }
 
   span:first-child {
-    padding: 0.15em 0.4em 0.05em;
+    padding: 0.1em 0.4em 0.05em;
     color: ${({ theme }) => theme.colors.grayDark};
     border: 1px solid currentColor;
   }
