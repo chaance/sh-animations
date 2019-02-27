@@ -48,8 +48,7 @@ export const HexWrapper = styled.div`
   width: 100%;
   /* clip-path: polygon(0 -5000%, 0 5000%, 5000% 5000%, 5000% 0); */
 
-  &:hover:not(.active) ${Img},
-  &:focus-within:not(.active) ${Img} {
+  &:hover:not(.active) ${Img} {
     filter: brightness(140%) saturate(70%);
   }
 `;

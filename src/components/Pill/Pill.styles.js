@@ -85,8 +85,7 @@ export const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.blueLight};
   color: #fff;
 
-  &:hover:not(.active),
-  &:focus-within:not(.active) {
+  &:hover:not(.active) {
     background-color: ${({ theme }) => theme.colors.blueMedium};
   }
 
@@ -98,8 +97,7 @@ export const Button = styled.button`
     background-color: #fff;
     color: ${({ theme }) => theme.colors.grayDark};
 
-    &:hover:not(.active),
-    &:focus-within:not(.active) {
+    &:hover:not(.active) {
       background-color: #fff;
     }
   }
