@@ -34,7 +34,7 @@ export const ListItem = styledDynamicTag(styled.li`
             transform: translate3d(0, 0, 0);
 
             > .wrapper > .button .indicator {
-              transition-delay: ${0.5 + (Math.abs(multiplier) * 0.125)}s;
+              transition-delay: ${0.5 + Math.abs(multiplier) * 0.125}s;
               /* transform: scale(1); */
             }
           }
@@ -119,6 +119,7 @@ export const Label = styled.span`
 `;
 
 export const Meta = styled.span`
+  line-height: 1;
   display: block;
   margin-top: 4px;
   margin-right: ${({ theme }) => theme.dimensions.pillMargin}px;
@@ -127,12 +128,12 @@ export const Meta = styled.span`
 
   span {
     display: inline-block;
-    color: ${({ theme}) => theme.colors.grayMedium};
+    color: ${({ theme }) => theme.colors.grayMedium};
   }
 
   span:first-child {
-    padding: 0.05em 0.4em;
-    color: ${({ theme}) => theme.colors.grayDark};
+    padding: 0.15em 0.4em 0.05em;
+    color: ${({ theme }) => theme.colors.grayDark};
     border: 1px solid currentColor;
   }
 `;
