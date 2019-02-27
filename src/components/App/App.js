@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ThemeProvider } from 'styled-components/macro';
 import { noop } from 'lodash';
 import Map from '../Map';
-import { theme, dimensions } from '../../context';
+import { theme, dimensions, timing } from '../../context';
 import { Wrapper } from './App.styles';
 
 class App extends Component {
@@ -129,7 +129,7 @@ class App extends Component {
 
   render() {
     return (
-      <ThemeProvider theme={{ ...theme, dimensions }}>
+      <ThemeProvider theme={{ ...theme, dimensions, timing }}>
         <Wrapper className="App" ref={this.wrapperRef}>
           <Map
             activePhase={this.state.activePhase}

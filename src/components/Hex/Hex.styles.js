@@ -11,7 +11,7 @@ export const ListItem = styledDynamicTag(styled.li`
   list-style: none;
   width: ${({ theme }) => theme.dimensions.hexWidth}px;
   height: ${({ theme }) => theme.dimensions.hexHeight}px;
-  transition: 1.5s transform ${BEZIER};
+  transition: ${({ theme }) => theme.timing.baseAnimationTime * 3}ms transform ${BEZIER};
 
   &:focus,
   &:focus-within * {
@@ -123,7 +123,7 @@ export const Pointer = styled.span`
   right: calc(50% - ${({ theme }) => theme.dimensions.hexBorder}px);
   height: ${({ theme }) => theme.dimensions.hexBorder}px;
   background: #fff;
-  transition: transform 0.2s ease-in 0.5s;
+  transition: transform ${({ theme }) => theme.timing.baseAnimationTime * 0.4}ms ease-in 0.5s;
   transform: scaleX(0);
   transform-origin: center right;
   z-index: 2;

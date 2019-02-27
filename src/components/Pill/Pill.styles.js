@@ -7,7 +7,8 @@ const activeTransition = `all 150ms ease-in`;
 export const ListItem = styledDynamicTag(styled.li`
   position: relative;
   margin: ${({ theme }) => theme.dimensions.pillMargin}px 0 !important;
-  transition: transform 0.5s ease-out 0.75s;
+  transition: transform ${({ theme }) => theme.timing.baseAnimationTime}ms
+    ease-out ${({ theme }) => theme.timing.baseAnimationTime * 1.5}ms;
   list-style: none;
   will-change: transform;
 
@@ -34,7 +35,10 @@ export const ListItem = styledDynamicTag(styled.li`
             transform: translate3d(0, 0, 0);
 
             > .wrapper > .button .indicator {
-              transition-delay: ${0.5 + Math.abs(multiplier) * 0.125}s;
+              transition-delay: ${({ theme }) =>
+                theme.timing.baseAnimationTime / 1000 +
+                Math.abs(multiplier) *
+                  (theme.timing.baseAnimationTime * 0.25)}ms;
               /* transform: scale(1); */
             }
           }

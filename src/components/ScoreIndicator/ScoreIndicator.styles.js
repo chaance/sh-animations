@@ -10,7 +10,8 @@ export const Indicator = styled.div`
   width: ${({ theme }) => theme.dimensions.pillHeight}px;
   height: ${({ theme }) => theme.dimensions.pillHeight}px;
   transform: scale(0);
-  transition: transform 0.5s ease-out;
+  transition: transform ${({ theme }) => theme.timing.baseAnimationTime}ms
+    ease-out;
   transform: scale(0);
   transform-origin: center;
   border: ${({ theme }) => theme.dimensions.pillBorder}px solid #fff;
@@ -19,16 +20,17 @@ export const Indicator = styled.div`
   will-change: transform;
 
   ${({ score, label }) => css`
-    ${!isNaN(score) && css`
-      .animating-enter-done &.${camelCase(label)} {
-        transform: scale(${score > 0 ? score / 5 : '1'});
-      }
-    `}
+    ${!isNaN(score) &&
+      css`
+        .animating-enter-done &.${camelCase(label)} {
+          transform: scale(${score > 0 ? score / 5 : '1'});
+        }
+      `}
   `}
 `;
 
 export const IndicatorInner = styled.div`
   flex-basis: 100%;
-  background-color: ${({ theme, backgroundKey }) => theme.colors.score[backgroundKey]};
+  background-color: ${({ theme, backgroundKey }) =>
+    theme.colors.score[backgroundKey]};
 `;
-

@@ -5,12 +5,12 @@ export const List = styledDynamicTag(styled.ul`
   margin: 0;
   padding: 0;
   transform: translate3d(
-    ${({ theme }) =>
-      (theme.dimensions.pillOffsetX) * -1}px,
+    ${({ theme }) => theme.dimensions.pillOffsetX * -1}px,
     -50%,
     0
   );
-  transition: transform 0.5s ease-out 0s;
+  transition: transform ${({ theme }) => theme.timing.baseAnimationTime}ms
+    ease-out 0s;
   list-style: none;
   will-change: transform;
 
@@ -20,8 +20,9 @@ export const List = styledDynamicTag(styled.ul`
     position: absolute;
     top: 50%;
     transform: translate3d(-50%, -50%, 0) scaleY(0);
-    transition: transform 0.425s ease-out;
-    transition-delay: 1.5s;
+    transition: transform
+      ${({ theme }) => theme.timing.baseAnimationTime * 0.85}ms ease-out;
+    transition-delay: ${({ theme }) => theme.timing.baseAnimationTime * 3}ms;
     background: #fff;
     height: calc(100% - ${({ theme }) => theme.dimensions.pillHeight * 2}px);
     width: 4px;
@@ -48,8 +49,7 @@ export const List = styledDynamicTag(styled.ul`
   &.animating-exit-active,
   &.animating-exit-done {
     transform: translate3d(
-      ${({ theme }) =>
-        (theme.dimensions.pillOffsetX) * -1}px,
+      ${({ theme }) => theme.dimensions.pillOffsetX * -1}px,
       -50%,
       0
     );
@@ -57,6 +57,6 @@ export const List = styledDynamicTag(styled.ul`
 
   &.animating-exit,
   &.animating-exit-active {
-    transition-delay: 0.75s;
+    transition-delay: ${({ theme }) => theme.timing.baseAnimationTime * 0.667}ms;
   }
 `);

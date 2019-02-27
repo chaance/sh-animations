@@ -55,3 +55,7 @@ export const dimensions = {
   pillOffsetX,
   pointerOffset,
 };
+
+export const timing = {
+  baseAnimationTime: 400,
+};

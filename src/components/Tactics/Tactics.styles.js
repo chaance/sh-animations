@@ -16,8 +16,9 @@ export const Pill = styled(P)`
     content: '';
     transform: translate3d(-50%, 0, 0) scale(0);
     transform-origin: center left;
-    transition: transform 0.5s ease-out;
-    transition-delay: 0.68s;
+    transition: transform ${({ theme }) => theme.timing.baseAnimationTime}ms
+      ease-out;
+    transition-delay: ${({ theme }) => theme.timing.baseAnimationTime * 1.36}ms;
     z-index: 0;
     will-change: transform;
   }

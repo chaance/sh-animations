@@ -38,7 +38,8 @@ export const Pointer = styled.span`
   top: calc(50% - 2px);
   left: 0;
   height: 4px;
-  transition: 0.5s opacity ease-in, 0.3s filter ease-in;
+  transition: ${({ theme }) => theme.timing.baseAnimationTime}ms opacity ease-in,
+    ${({ theme }) => theme.timing.baseAnimationTime * 0.6}ms filter ease-in;
   transform-origin: left center;
   transform: scaleX(1) rotate(0);
   background: #fff;
@@ -47,7 +48,7 @@ export const Pointer = styled.span`
   will-change: transform, filter, opacity;
 
   .previousHex-start & {
-    transition-delay: 0.35s;
+    transition-delay: ${({ theme }) => theme.timing.baseAnimationTime * 0.7}ms;
   }
 
   &.animating-enter {
