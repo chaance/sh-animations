@@ -13,7 +13,7 @@ export const Hex = styled(H)`
 
   &.mapIsActive {
     transform: translate3d(
-      ${({ theme }) => theme.dimensions.hexOffsetX * -1.5}px,
+      ${({ theme }) => theme.dimensions.hexWidth * -1}px,
       0,
       0
     );

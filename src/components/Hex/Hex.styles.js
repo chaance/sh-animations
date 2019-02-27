@@ -131,11 +131,11 @@ export const Pointer = styled.span`
 
   li:nth-child(1) & {
     top: ${({ theme }) => theme.dimensions.pointerOffset}px;
-    transform: ${pointerTranslate} rotate(-45deg) scaleX(0);
+    transform: ${pointerTranslate} rotate(-30deg) scaleX(0);
   }
 
   li.active:nth-child(1) & {
-    transform: ${pointerTranslate} rotate(-45deg) scaleX(1);
+    transform: ${pointerTranslate} rotate(-30deg) scaleX(1);
   }
 
   li:nth-child(2) & {
@@ -149,10 +149,10 @@ export const Pointer = styled.span`
 
   li:nth-child(3) & {
     top: ${({ theme }) => theme.dimensions.hexHeight - theme.dimensions.pointerOffset}px;
-    transform: ${pointerTranslate} rotate(45deg) scaleX(0);
+    transform: ${pointerTranslate} rotate(30deg) scaleX(0);
   }
 
   li.active:nth-child(3) & {
-    transform: ${pointerTranslate} rotate(45deg) scaleX(1);
+    transform: ${pointerTranslate} rotate(30deg) scaleX(1);
   }
 `;
