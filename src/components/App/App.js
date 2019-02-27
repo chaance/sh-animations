@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ThemeProvider } from 'styled-components/macro';
 import { noop } from 'lodash';
 import Map from '../Map';
+import Key from '../Key';
 import { theme, dimensions, timing } from '../../context';
 import { Wrapper } from './App.styles';
 
@@ -137,6 +138,7 @@ class App extends Component {
             updateActivePhase={this.updateActivePhase}
             updateActiveTactic={this.updateActiveTactic}
           />
+          <Key />
         </Wrapper>
       </ThemeProvider>
     );
