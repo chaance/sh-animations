@@ -102,8 +102,12 @@ export const Button = styled.button`
     }
   }
 
-  .active & {
-    /* color: ${({ theme }) => theme.colors.blueMedium}; */
+  &.active {
+    background: #fff;
+    color: ${({ theme }) => theme.colors.blueMedium};
+    &:after {
+      transform: translate3d(0, -50%, 0) scale(1);
+    }
   }
 `;
 
