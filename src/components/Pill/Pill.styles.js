@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components/macro';
 import { range } from 'lodash';
 import SI from '../ScoreIndicator';
 import styledDynamicTag from '../../lib/styledDynamicTag';
+import { normalizeButton } from '../../lib/styledUtils';
 const activeTransition = `all 150ms ease-in`;
 
 export const ListItem = styledDynamicTag(styled.li`
@@ -66,18 +67,7 @@ export const PillWrapper = styled.div`
 export const ScoreIndicator = styled(SI)``;
 
 export const Button = styled.button`
-  /* normalize to remove button styles */
-  appearance: none;
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-  border: 0;
-  box-shadow: none;
-  text-transform: none;
-
+  ${normalizeButton()}
   display: block;
   overflow: hidden;
   width: ${({ theme }) => theme.dimensions.pillWidth}px;

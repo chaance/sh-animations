@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import styledDynamicTag from '../../lib/styledDynamicTag';
-import { emptyBlock } from '../../lib/styledUtils';
+import { emptyBlock, normalizeButton } from '../../lib/styledUtils';
 const activeTransition = `all 150ms ease-in`;
 
 const BEZIER = `cubic-bezier(.17,.24,.04,.99)`;
@@ -54,18 +54,7 @@ export const HexWrapper = styled.div`
 `;
 
 export const Button = styled.button`
-  /* normalize to remove button styles */
-  appearance: none;
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-  border: 0;
-  box-shadow: none;
-  text-transform: none;
-
+  ${normalizeButton()}
   ${emptyBlock()}
   transition: ${activeTransition};
   background-color: transparent;

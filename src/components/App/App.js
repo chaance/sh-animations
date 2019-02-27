@@ -14,6 +14,7 @@ class App extends Component {
     techniqueCount: 0,
     wrapperWidth: null,
     wrapperHeight: null,
+    keyIsActive: true,
   };
 
   wrapperRef = React.createRef();
@@ -128,6 +129,9 @@ class App extends Component {
     });
   };
 
+  toggleKey = () =>
+    this.setState(({ keyIsActive }) => ({ keyIsActive: !keyIsActive }));
+
   render() {
     return (
       <ThemeProvider theme={{ ...theme, dimensions, timing }}>
@@ -138,7 +142,7 @@ class App extends Component {
             updateActivePhase={this.updateActivePhase}
             updateActiveTactic={this.updateActiveTactic}
           />
-          <Key />
+          <Key active={this.state.keyIsActive} toggle={this.toggleKey} />
         </Wrapper>
       </ThemeProvider>
     );

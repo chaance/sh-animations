@@ -7,6 +7,7 @@ export const theme = {
     blueMedium: `#2475D9`,
     grayDark: `#6e6f72`,
     grayMedium: `#6e6f72`,
+    grayLight: `#b8b9bc`,
     score: ['#ee2436', '#fd8b24', '#fadc00', '#46be6e', '#0a8228'],
   },
 };
