@@ -12,11 +12,11 @@ import {
 } from './Pill.styles';
 
 const Pill = ({
+  active = false,
   children,
   className = '',
   count = 1,
   element = 'li',
-  isActive = false,
   label = 'Button',
   mapIsActive = false,
   onClick = noop,
@@ -34,14 +34,17 @@ const Pill = ({
       count={count}
       element={element}
       className={cx(className, {
-        active: isActive,
+        active,
         parentIsActive,
         mapIsActive,
       })}
     >
       <PillWrapper className="wrapper">
         <Button
-          className={cx('button', { 'has-click-handler': onClick, active: isActive })}
+          className={cx('button', {
+            active,
+            'has-click-handler': onClick,
+          })}
           onClick={onClick}
         >
           {(score || hasScoreComposition) && (
@@ -62,11 +65,11 @@ const Pill = ({
 };
 
 Pill.propTypes = {
+  active: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
   count: PropTypes.number,
   element: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  isActive: PropTypes.bool,
   label: PropTypes.string,
   mapIsActive: PropTypes.bool,
   onClick: PropTypes.func,

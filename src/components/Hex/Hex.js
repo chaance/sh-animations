@@ -18,7 +18,7 @@ import {
 const Label = ({ children, hide }) =>
   hide ? <Hide>{children}</Hide> : <LabelWrapper>{children}</LabelWrapper>;
 
-const Img = ({ img, alt, activeImg, isActive }) => {
+const Img = ({ img, alt, activeImg, active }) => {
   const transitionProps = {
     timeout: 150,
     classNames: 'animating',
@@ -28,10 +28,10 @@ const Img = ({ img, alt, activeImg, isActive }) => {
     <React.Fragment>
       {/* First image is here just to make sure there's never a fully transparent background */}
       <I src={img} alt="placeholder" aria-hidden />
-      <CSSTransition in={!isActive} {...transitionProps}>
+      <CSSTransition in={!active} {...transitionProps}>
         <I src={img} alt="decorative hex icon" aria-hidden />
       </CSSTransition>
-      <CSSTransition in={isActive} {...transitionProps}>
+      <CSSTransition in={active} {...transitionProps}>
         <I src={activeImg} alt="decorative hex icon" aria-hidden />
       </CSSTransition>
     </React.Fragment>
@@ -47,33 +47,36 @@ const Hex = ({
   element = 'li',
   hideLabel = false,
   img,
-  isActive = false,
+  active = false,
   label = 'Button',
   mapIsActive = false,
   numberTag,
   onClick = noop,
 }) => {
+  const activeClass = cx({ active });
   return (
     <ListItem
       element={element}
       className={cx(className, {
-        active: isActive,
-        mapIsActive: mapIsActive,
+        active,
+        mapIsActive,
       })}
     >
-      <Pointer aria-hidden />
+      <Pointer className={activeClass} aria-hidden />
       <Clipper aria-hidden />
-      <HexWrapper className={cx({ active: isActive })}>
+      <HexWrapper className={activeClass}>
         <Img
           img={img}
           activeImg={activeImg}
-          isActive={isActive}
+          active={active}
           alt="decorative hex icon"
         />
-        <NumberWrapper aria-hidden>{numberTag}</NumberWrapper>
+        <NumberWrapper className={activeClass} aria-hidden>
+          {numberTag}
+        </NumberWrapper>
         <Button
           onClick={onClick}
-          className={cx({ 'has-click-handler': onClick })}
+          className={cx(activeClass, { 'has-click-handler': onClick })}
         >
           <Label hide={hideLabel}>{label}</Label>
         </Button>
@@ -84,13 +87,13 @@ const Hex = ({
 };
 
 Hex.propTypes = {
+  active: PropTypes.bool,
   activeImg: PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string,
   element: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   hideLabel: PropTypes.bool,
   img: PropTypes.string.isRequired,
-  isActive: PropTypes.bool,
   label: PropTypes.string,
   mapIsActive: PropTypes.bool,
   numberTag: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

@@ -11,7 +11,8 @@ export const ListItem = styledDynamicTag(styled.li`
   list-style: none;
   width: ${({ theme }) => theme.dimensions.hexWidth}px;
   height: ${({ theme }) => theme.dimensions.hexHeight}px;
-  transition: ${({ theme }) => theme.timing.baseAnimationTime * 3}ms transform ${BEZIER};
+  transition: ${({ theme }) => theme.timing.baseAnimationTime * 3}ms transform
+    ${BEZIER};
 
   &:focus,
   &:focus-within * {
@@ -39,14 +40,12 @@ export const Img = styled.img`
   }
 `;
 
-
 export const HexWrapper = styled.div`
   position: relative;
   margin: 0;
   list-style: none;
   height: 100%;
   width: 100%;
-  /* clip-path: polygon(0 -5000%, 0 5000%, 5000% 5000%, 5000% 0); */
 
   &:hover:not(.active) ${Img} {
     filter: brightness(140%) saturate(70%);
@@ -65,7 +64,7 @@ export const Button = styled.button`
     cursor: pointer;
   }
 
-  .active & {
+  &.active {
     color: ${({ theme }) => theme.colors.blueMedium};
   }
 `;
@@ -89,7 +88,7 @@ export const NumberWrapper = styled.span`
   text-align: center;
   z-index: 2;
 
-  .active & {
+  &.active {
     color: #fff;
   }
 `;
@@ -100,7 +99,7 @@ export const Clipper = styled.span`
   left: -100%;
   width: 150%;
   height: ${({ theme }) => theme.dimensions.pillCalculatedHeight + 2}px;
-  background: ${({ theme }) => theme.colors.black} ;
+  background: ${({ theme }) => theme.colors.black};
   transform: translateY(-50%);
   z-index: 1;
 `;
@@ -112,7 +111,8 @@ export const Pointer = styled.span`
   right: calc(50% - ${({ theme }) => theme.dimensions.hexBorder}px);
   height: ${({ theme }) => theme.dimensions.hexBorder}px;
   background: #fff;
-  transition: transform ${({ theme }) => theme.timing.baseAnimationTime * 0.4}ms ease-in 0.5s;
+  transition: transform ${({ theme }) =>
+    theme.timing.baseAnimationTime * 0.4}ms ease-in 0.5s;
   transform: scaleX(0);
   transform-origin: center right;
   z-index: 2;
@@ -120,27 +120,25 @@ export const Pointer = styled.span`
   li:nth-child(1) & {
     top: ${({ theme }) => theme.dimensions.pointerOffset}px;
     transform: ${pointerTranslate} rotate(-30deg) scaleX(0);
-  }
-
-  li.active:nth-child(1) & {
-    transform: ${pointerTranslate} rotate(-30deg) scaleX(1);
+    &.active {
+      transform: ${pointerTranslate} rotate(-30deg) scaleX(1);
+    }
   }
 
   li:nth-child(2) & {
     top: 50%;
     transform: ${pointerTranslate} scaleX(0);
-  }
-
-  li.active:nth-child(2) & {
-    transform: ${pointerTranslate} scaleX(1);
+    &.active {
+      transform: ${pointerTranslate} scaleX(1);
+    }
   }
 
   li:nth-child(3) & {
-    top: ${({ theme }) => theme.dimensions.hexHeight - theme.dimensions.pointerOffset}px;
+    top: ${({ theme }) =>
+      theme.dimensions.hexHeight - theme.dimensions.pointerOffset}px;
     transform: ${pointerTranslate} rotate(30deg) scaleX(0);
-  }
-
-  li.active:nth-child(3) & {
-    transform: ${pointerTranslate} rotate(30deg) scaleX(1);
+    &.active {
+      transform: ${pointerTranslate} rotate(30deg) scaleX(1);
+    }
   }
 `;

@@ -11,7 +11,6 @@ const Techniques = ({ className, techniques, isActiveTactic, mapIsActive }) => (
           count={techniques.length}
           key={technique}
           className={cx('technique')}
-          // isActive={isActiveTactic}
           label={technique}
           parentIsActive={isActiveTactic}
           mapIsActive={mapIsActive}
